@@ -620,9 +620,11 @@ void PAPI_UTIL_finish(void)
     _time_measured += time;
 #pragma omp parallel
     {
-        if (PAPI_num_events(_event_sets[omp_get_thread_num()]) > 0)
+        if (PAPI_num_events(_event_sets[omp_get_thread_num()]) > 0) {
             CHECK_PAPI_ERROR(PAPI_stop(_event_sets[omp_get_thread_num()],
                                        _thread_values[omp_get_thread_num()]));
+            _thread_counter_started = 0;
+        }
 
 #pragma omp barrier
 
