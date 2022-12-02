@@ -43,6 +43,11 @@
 #include <string.h>
 #include <time.h>
 
+#ifdef __ARM_FEATURE_SVE
+#define ELLGEMV16SVE 1
+#include "ellgemv16sve.h"
+#endif /* __ARM_FEATURE_SVE */
+
 const char * program_name = "ellspmv";
 const char * program_version = "1.0";
 const char * program_copyright =
@@ -861,8 +866,14 @@ int main(int argc, char *argv[])
         }
 
         if (rowsize == 16) {
+#if ELLGEMV16SVE
+            err = ellgemv16sve(
+                num_rows, y, num_columns, x, ellsize, rowsize, ellcolidx, ella, ellad);
+#else
             err = ellgemv16(
                 num_rows, y, num_columns, x, ellsize, rowsize, ellcolidx, ella, ellad);
+#endif /* ELLGEMV16SVE */
+
             if (err)
                 break;
         } else {
