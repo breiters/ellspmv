@@ -45,7 +45,7 @@ ellspmv_c_objects := $(foreach x,$(ellspmv_c_sources),$(x:.c=.o))
 PAPI_ROOT?=$(shell dirname $(dir $(shell which papi_avail)))
 PAPI_INC?=-I$(PAPI_ROOT)/include
 PAPI_LIB?=-L$(PAPI_ROOT)/lib
-USEPAPI?=0
+USEPAPI?=1
 
 ifeq (1,$(USEPAPI))
 PAPI_OBJ=papi_util/src/papi_util.o
