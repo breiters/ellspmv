@@ -38,11 +38,17 @@ static const size_t BITS_PER_LONG_LONG = 8 * sizeof(long long);
 // set bit 62-63 makes IMP_PF_STREAM_DETECT_CTRL_EL0 accessible from EL0
 //
 // IMP_PF_STREAM_DETECT_CTRL_EL0: S3_3_C11_C4_0
+// 
+// [63] V RW
+// 1: A value of IMP_PF_STREAM_DETECT_CTRL_EL0 is valid
+// 0: It operates by a set value of Default.
+//
 // [27:24] L1_DISTRW
 // The distance of the hardware prefetch to L1 cache is specified.
 // The prefetch distance for L1 is calculated as (L1_DIST * 256B).
 // When L1_DIST = 0, the hardware prefetch for L1 operates by the
 // default distance.
+//
 // [19:16] L2_DISTRW
 // The distance of the hardware prefetch to L2 cache is specified.
 // The prefetch distance for L2 is calculated as (L2_DIST * 1KB).
